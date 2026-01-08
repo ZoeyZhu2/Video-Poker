@@ -88,8 +88,6 @@ public class Card implements Comparable<Card>{
 		}
 		return s;
 	}
-	// add some more methods here if needed
-
 
 	//compares suits
 	public int compareSuit(Card c) {
