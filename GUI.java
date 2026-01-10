@@ -139,11 +139,9 @@ public class GUI extends JFrame {
         GUI gui = new GUI();
     }
 
-    //method to get card icons for each card --- TO DO LATER ---
     public ImageIcon getCardIcon(Card c) {
         String name = c.toString();
-        //somehow replace spaces with underscores
-        String fileName = "Images/" + name + ".png";
+        String fileName = "Card Images/" + name + ".png";
         return new ImageIcon(fileName);
     }
 
