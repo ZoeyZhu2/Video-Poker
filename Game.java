@@ -86,119 +86,121 @@ public class Game {
 		}
 	}
 	
-	public void play(){
-		// this method should play the game	
-		Scanner input = new Scanner(System.in);
-		System.out.println("Welcome to Video Poker!");
-		System.out.println("YOUR TOKENS: " + p.getBankroll());
-		System.out.print("Would you like to play a round? (y/n): ");
-		String answer = input.next();
-		boolean play = false;
-		if (answer.equals("y")) {
-			play = true;
-		}
+	// public void play(){
+	// 	// this method should play the game	
+	// 	Scanner input = new Scanner(System.in);
+	// 	System.out.println("Welcome to Video Poker!");
+	// 	System.out.println("YOUR TOKENS: " + p.getBankroll());
+	// 	System.out.print("Would you like to play a round? (y/n): ");
+	// 	String answer = input.next();
+	// 	boolean play = false;
+	// 	if (answer.equals("y")) {
+	// 		play = true;
+	// 	}
 
-		//enter game:
-		while (play) {
-			//betting
-			System.out.print("How many tokens to bet this hand? (1 to 5): ");
-			double bet = input.nextDouble();
+	// 	//enter game:
+	// 	while (play) {
+	// 		//betting
+	// 		System.out.print("How many tokens to bet this hand? (1 to 5): ");
+	// 		double bet = input.nextDouble();
 
-			//checking for valid inputs
-			while (true) {
-				if (bet <= p.getBankroll() && bet <= 5.0 && bet >= 1.0) {
-					break;
-				}
-				System.out.println("You cannot bet this many tokens.");
-				System.out.print("How many tokens to bet this hand? (1 to 5): ");
-				bet = input.nextDouble();
-			}
-			p.bets(bet);
+	// 		//checking for valid inputs
+			
+	// 		while (true) {
+	// 			if (bet <= p.getBankroll() && bet <= 5.0 && bet >= 1.0) {
+	// 				break;
+	// 			}
+	// 			System.out.println("You cannot bet this many tokens.");
+	// 			System.out.print("How many tokens to bet this hand? (1 to 5): ");
+	// 			bet = input.nextDouble();
+	// 		}
+	// 		p.bets(bet);
+			
 
-			//showing cards
-			System.out.println("The hand is: " + p.showHand());
+	// 		//showing cards
+	// 		System.out.println("The hand is: " + p.showHand());
 
-			//exchanging cards
-			System.out.print("How many cards (0-5) would you like to exchange? ");
-			int num = input.nextInt();
+	// 		//exchanging cards
+	// 		System.out.print("How many cards (0-5) would you like to exchange? ");
+	// 		int num = input.nextInt();
 
-			//checking for valid inputs
-			while (true) {
-				if (num < 5 && num >= 0) {
-					break;
-				}
-				System.out.println("Invalid answer.");
-				System.out.print("How many cards (0-5) would you like to exchange? ");
-				num = input.nextInt();
-			}
-			int[] exchange = new int[num];
+	// 		//checking for valid inputs
+	// 		while (true) {
+	// 			if (num < 5 && num >= 0) {
+	// 				break;
+	// 			}
+	// 			System.out.println("Invalid answer.");
+	// 			System.out.print("How many cards (0-5) would you like to exchange? ");
+	// 			num = input.nextInt();
+	// 		}
+	// 		int[] exchange = new int[num];
 
-			//asking for cards to exchange
-			ArrayList<Integer> chosenCards = new ArrayList<>();
-			for (int i = 0; i < num; i++) {
-				System.out.print("Which card (1-5) would you like to exchange? ");
-				int choice = input.nextInt();
-				//checking to make sure the user does not choose to exchange the same card multiple times
-				while (chosenCards.indexOf(choice) != -1) {
-					System.out.print("Choose a card you have not chosen before. Which card (1-5) would you like to exchange? ");
-					choice = input.nextInt();
-				}
-				exchange[i] = choice - 1;
-				chosenCards.add(choice);
-			}
+	// 		//asking for cards to exchange
+	// 		ArrayList<Integer> chosenCards = new ArrayList<>();
+	// 		for (int i = 0; i < num; i++) {
+	// 			System.out.print("Which card (1-5) would you like to exchange? ");
+	// 			int choice = input.nextInt();
+	// 			//checking to make sure the user does not choose to exchange the same card multiple times
+	// 			while (chosenCards.indexOf(choice) != -1) {
+	// 				System.out.print("Choose a card you have not chosen before. Which card (1-5) would you like to exchange? ");
+	// 				choice = input.nextInt();
+	// 			}
+	// 			exchange[i] = choice - 1;
+	// 			chosenCards.add(choice);
+	// 		}
 
-			//exchanging cards
-			for (int i = 0; i < num; i++) {
-				p.exchangeCard(exchange[i], cards.deal());
-			}
-			System.out.println("The hand is: " + p.showHand());
+	// 		//exchanging cards
+	// 		for (int i = 0; i < num; i++) {
+	// 			p.exchangeCard(exchange[i], cards.deal());
+	// 		}
+	// 		System.out.println("The hand is: " + p.showHand());
 
-			//seeing what the result of the hand is
-			String result = checkHand(p.getHand());
-			System.out.println("You got " + result);
+	// 		//seeing what the result of the hand is
+	// 		String result = checkHand(p.getHand());
+	// 		System.out.println("You got " + result);
 
 
-			//calculating payout and adding it to player's bankroll
-			double multiplier = getMultiplier(result);
-			p.winnings(multiplier);
-			double payout = bet * multiplier;
-			System.out.println("Payout: " + (int)payout + " tokens");
+	// 		//calculating payout and adding it to player's bankroll
+	// 		double multiplier = getMultiplier(result);
+	// 		p.winnings(multiplier);
+	// 		double payout = bet * multiplier;
+	// 		System.out.println("Payout: " + (int)payout + " tokens");
 
-			if ((int)p.getBankroll() == 0) {
-				System.out.println("Sorry, you are out of tokens :(");
-				break;
-			}
+	// 		if ((int)p.getBankroll() == 0) {
+	// 			System.out.println("Sorry, you are out of tokens :(");
+	// 			break;
+	// 		}
 
-			//sharing player's bankroll
-			System.out.println("YOUR TOKENS: " + p.getBankroll());
+	// 		//sharing player's bankroll
+	// 		System.out.println("YOUR TOKENS: " + p.getBankroll());
 
-			//play again?
-			System.out.print("Would you like to play a round? (y/n): ");
-			answer = input.next();
-			play = false;
-			if (answer.equals("y")) {
-				play = true;
-			}
-			//remove any cards from the player's hand:
-			p.clearHand();
+	// 		//play again?
+	// 		System.out.print("Would you like to play a round? (y/n): ");
+	// 		answer = input.next();
+	// 		play = false;
+	// 		if (answer.equals("y")) {
+	// 			play = true;
+	// 		}
+	// 		//remove any cards from the player's hand:
+	// 		p.clearHand();
 
-			//making a new deck 
-			cards = new Deck();
+	// 		//making a new deck 
+	// 		cards = new Deck();
 
-			//shuffle cards before the start of each game
-			cards.shuffle(); 	
+	// 		//shuffle cards before the start of each game
+	// 		cards.shuffle(); 	
 
-			//dealing new cards before the start of each game
-			for (int i = 0; i < 5; i++) {
-				p.addCard(cards.deal());
-			}
+	// 		//dealing new cards before the start of each game
+	// 		for (int i = 0; i < 5; i++) {
+	// 			p.addCard(cards.deal());
+	// 		}
 
-		}
+	// 	}
 
-		//the end:
-		System.out.println("Thank you for playing Video Poker!");
+	// 	//the end:
+	// 	System.out.println("Thank you for playing Video Poker!");
 
-	}
+	// }
 	
 	public String checkHand(ArrayList<Card> hand){
 		// this method should take an ArrayList of cards
@@ -321,4 +323,12 @@ public class Game {
 		}
 		return multiplier;
 	}
+	public Deck getDeck() {
+	return cards;
+	}
+
+	public Player getPlayer() {
+		return p;
+	}
 }
+
